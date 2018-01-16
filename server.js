@@ -19,21 +19,21 @@ client.on('message', message =>
 {
     if(message.channel.name == twitChannelName)
     {
-        if(message.content.toLowerCase().startsWith("pc players"))
-        {
-            // PC message
-            message.guild.channels.find(val => val.name == pcName).send(message.guild.defaultRole + " " + message.content);
-
-        }else if(message.content.toLowerCase().startsWith("xbox players"))
-        {
+        client.setTimeout(function() {
+            if(message.content.toLowerCase().split(' ')[5].startsWith("pc players"))
+            {
+                // PC message
+                message.guild.channels.find(val => val.name == pcName).send(message.guild.defaultRole + " " + message.content.split(' ')[5]);
+            }else if(message.content.toLowerCase().split(' ')[5].startsWith("xbox players"))
+            {
             // xbox message
-            message.guild.channels.find(val => val.name == xboxName).send(message.guild.defaultRole + " " + message.content);
+                message.guild.channels.find(val => val.name == xboxName).send(message.guild.defaultRole + " " + message.content.split(' ')[5]);
 
-        }else{
+            }else{
             // General message
-            message.guild.channels.find(val => val.name == generalName).send(message.guild.defaultRole + " " + message.content);
-
-        }
+                message.guild.channels.find(val => val.name == generalName).send(message.guild.defaultRole + " " + message.content.split(' ')[5]);
+            }
+        }, waitTime);
     }
 });
 
